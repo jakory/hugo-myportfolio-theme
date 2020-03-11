@@ -23,6 +23,13 @@
     {{ end }}
 {{ end }}
 
+{{ $images_directory := .Params.images_directory | default "images" }}
+{{ $images_static := .Params.images_static | default "false" }}
+{{ $images_copyright := .Params.images_copyright }}
+{{ $images_params := .Params.images }}
+{{ partial "gallery.html" (dict "page" . "dir" $images_directory "static" $images_static "images_params" $images_params "images_copyright" $images_copyright) }}
+{{ partial "load-photoswipe.html" (dict "page" .) }}
+
 {{/* List posts (default value is true) */}}
 {{ if (or (not (isset .Params "showposts")) (.Params.showposts)) }}
     {{ if .Pages }}
